@@ -4,14 +4,12 @@
 name: (classic) Build and Deploy Logic App. 
 
 env:
-  LA_NAME: 'dev-logic-3242'
-  LA_NAME_prod: 'prod-logic-3242'
+  LA_NAME: 'dev-logic-app'
+  LA_NAME_prod: 'prod-logic-arc'
 
 on:
   workflow_dispatch:
     # Trigger the workflow every time the build workflow ran to completion
-  workflow_run:
-  # Triggers when an environment file has been changed  
   push:
     branches: [ master ]
 
