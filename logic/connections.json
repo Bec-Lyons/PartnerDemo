@@ -1,0 +1,18 @@
+{
+  "managedApiConnections": {
+    "servicebus": {
+      "api": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/providers/Microsoft.Web/locations/westus/managedApis/servicebus"
+      },
+      "connection": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/connections/providers/Microsoft.Web/connections/servicebus"
+      },
+      "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/servicebus/414ac0c80f6f45b4a75ff8085f0a9ae3/",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('servicebus-connectionKey')"
+      }
+    }
+  }
+}
