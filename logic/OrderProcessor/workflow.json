@@ -1,100 +1,100 @@
 {
-    "definition": {
-        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-        "actions": {
-            "Switch": {
-                "type": "Switch",
-                "expression": "@triggerBody()?['item']",
-                "cases": {
-                    "Coffee": {
-                        "case": "Coffee",
-                        "actions": {
-                            "Response": {
-                                "type": "Response",
-                                "kind": "http",
-                                "inputs": {
-                                    "statusCode": 200,
-                                    "body": "Processing Coffee order"
-                                },
-                                "runAfter": {}
-                            }
-                        }
-                    },
-                    "Beans": {
-                        "case": "Coffee Beans",
-                        "actions": {
-                            "Response_2": {
-                                "type": "Response",
-                                "kind": "http",
-                                "inputs": {
-                                    "statusCode": 200,
-                                    "body": "Processing beans order"
-                                },
-                                "runAfter": {}
-                            }
-                        }
-                    },
-                    "Food": {
-                        "case": "Food",
-                        "actions": {
-                            "Response_3": {
-                                "type": "Response",
-                                "kind": "http",
-                                "inputs": {
-                                    "statusCode": 200,
-                                    "body": "Processing Food Order"
-                                },
-                                "runAfter": {}
-                            }
-                        }
-                    }
-                },
-                "default": {
-                    "actions": {
-                        "Response_4": {
-                            "type": "Response",
-                            "kind": "http",
-                            "inputs": {
-                                "statusCode": 200,
-                                "body": "We don't have any in stock "
-                            },
-                            "runAfter": {}
-                        }
-                    }
-                },
-                "runAfter": {}
-            }
-        },
-        "triggers": {
-            "manual": {
-                "type": "Request",
-                "kind": "Http",
-                "inputs": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "number": {
-                                "type": "string"
-                            },
-                            "item": {
-                                "type": "string"
-                            },
-                            "quantity": {
-                                "type": "integer"
-                            },
-                            "address": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "contentVersion": "1.0.0.0",
-        "outputs": {}
-    },
-    "kind": "Stateful"
+  "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+          "Switch": {
+              "cases": {
+                  "Beans": {
+                      "actions": {
+                          "Processing_beans_order": {
+                              "inputs": {
+                                  "body": "Processing beans order",
+                                  "statusCode": 200
+                              },
+                              "kind": "http",
+                              "runAfter": {},
+                              "type": "Response"
+                          }
+                      },
+                      "case": "Coffee Beans"
+                  },
+                  "Coffee": {
+                      "actions": {
+                          "Processing_Coffee_order": {
+                              "inputs": {
+                                  "body": "Processing Coffee order",
+                                  "statusCode": 200
+                              },
+                              "kind": "http",
+                              "runAfter": {},
+                              "type": "Response"
+                          }
+                      },
+                      "case": "Coffee"
+                  },
+                  "Food": {
+                      "actions": {
+                          "Processing_food_order": {
+                              "inputs": {
+                                  "body": "Processing Food Order",
+                                  "statusCode": 200
+                              },
+                              "kind": "http",
+                              "runAfter": {},
+                              "type": "Response"
+                          }
+                      },
+                      "case": "Food"
+                  }
+              },
+              "default": {
+                  "actions": {
+                      "Didn't_recognize_order_": {
+                          "inputs": {
+                              "body": "We don't have any in stock ",
+                              "statusCode": 200
+                          },
+                          "kind": "http",
+                          "runAfter": {},
+                          "type": "Response"
+                      }
+                  }
+              },
+              "expression": "@triggerBody()?['item']",
+              "runAfter": {},
+              "type": "Switch"
+          }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "triggers": {
+          "manual": {
+              "inputs": {
+                  "schema": {
+                      "properties": {
+                          "address": {
+                              "type": "string"
+                          },
+                          "item": {
+                              "type": "string"
+                          },
+                          "name": {
+                              "type": "string"
+                          },
+                          "number": {
+                              "type": "string"
+                          },
+                          "quantity": {
+                              "type": "integer"
+                          }
+                      },
+                      "type": "object"
+                  }
+              },
+              "kind": "Http",
+              "type": "Request"
+          }
+      }
+  },
+  "kind": "Stateful"
 }
