@@ -9,9 +9,7 @@
       },
       "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/servicebus/be4093ec320e4739a2b28abbeca0f48d/",
       "authentication": {
-        "type": "Raw",
-        "scheme": "Key",
-        "parameter": "@appsetting('servicebus-connectionKey')"
+        "type": "ManagedIdentity"
       }
     }
   }
