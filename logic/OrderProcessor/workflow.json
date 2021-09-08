@@ -2,37 +2,65 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
-            "Response": {
-                "type": "Response",
-                "kind": "http",
-                "inputs": {
-                    "statusCode": 200
-                },
-                "runAfter": {
-                    "Switch": [
-                        "Succeeded"
-                    ]
-                }
-            },
             "Switch": {
                 "type": "Switch",
                 "expression": "@triggerBody()?['item']",
                 "cases": {
                     "Coffee": {
                         "case": "Coffee",
-                        "actions": {}
+                        "actions": {
+                            "Response": {
+                                "type": "Response",
+                                "kind": "http",
+                                "inputs": {
+                                    "statusCode": 200,
+                                    "body": "Processing Coffee order"
+                                },
+                                "runAfter": {}
+                            }
+                        }
                     },
                     "Beans": {
                         "case": "Coffee Beans",
-                        "actions": {}
+                        "actions": {
+                            "Response_2": {
+                                "type": "Response",
+                                "kind": "http",
+                                "inputs": {
+                                    "statusCode": 200,
+                                    "body": "Processing beans order"
+                                },
+                                "runAfter": {}
+                            }
+                        }
                     },
                     "Food": {
                         "case": "Food",
-                        "actions": {}
+                        "actions": {
+                            "Response_3": {
+                                "type": "Response",
+                                "kind": "http",
+                                "inputs": {
+                                    "statusCode": 200,
+                                    "body": "Processing Food Order"
+                                },
+                                "runAfter": {}
+                            }
+                        }
                     }
                 },
                 "default": {
-                    "actions": {}
+                    "actions": {
+                        "Response_4": {
+                            "type": "Response",
+                            "kind": "http",
+                            "inputs": {
+                                "statusCode": 200,
+                                "body": "We don't have any in stock "
+                            },
+                            "runAfter": {}
+                        }
+                    }
                 },
                 "runAfter": {}
             }

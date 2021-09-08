@@ -1,0 +1,72 @@
+{
+  "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+          "Response": {
+              "type": "Response",
+              "kind": "http",
+              "inputs": {
+                  "statusCode": 200
+              },
+              "runAfter": {
+                  "Switch": [
+                      "Succeeded"
+                  ]
+              }
+          },
+          "Switch": {
+              "type": "Switch",
+              "expression": "@triggerBody()?['item']",
+              "cases": {
+                  "Coffee": {
+                      "case": "Coffee",
+                      "actions": {}
+                  },
+                  "Beans": {
+                      "case": "Coffee Beans",
+                      "actions": {}
+                  },
+                  "Food": {
+                      "case": "Food",
+                      "actions": {}
+                  }
+              },
+              "default": {
+                  "actions": {}
+              },
+              "runAfter": {}
+          }
+      },
+      "triggers": {
+          "manual": {
+              "type": "Request",
+              "kind": "Http",
+              "inputs": {
+                  "schema": {
+                      "type": "object",
+                      "properties": {
+                          "name": {
+                              "type": "string"
+                          },
+                          "number": {
+                              "type": "string"
+                          },
+                          "item": {
+                              "type": "string"
+                          },
+                          "quantity": {
+                              "type": "integer"
+                          },
+                          "address": {
+                              "type": "string"
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {}
+  },
+  "kind": "Stateful"
+}

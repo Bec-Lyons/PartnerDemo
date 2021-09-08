@@ -56,53 +56,6 @@
                     }
                 },
                 "runAfter": {}
-            },
-            "Complete_the_message_in_a_queue": {
-                "type": "ApiConnection",
-                "inputs": {
-                    "host": {
-                        "connection": {
-                            "referenceName": "servicebus"
-                        }
-                    },
-                    "method": "delete",
-                    "path": "/@{encodeURIComponent(encodeURIComponent('neworders'))}/messages/complete",
-                    "queries": {
-                        "lockToken": "@triggerBody()?['LockToken']",
-                        "queueType": "Main",
-                        "sessionId": ""
-                    }
-                },
-                "runAfter": {
-                    "Scope": [
-                        "Succeeded"
-                    ]
-                }
-            },
-            "Dead-letter_the_message_in_a_queue": {
-                "type": "ApiConnection",
-                "inputs": {
-                    "host": {
-                        "connection": {
-                            "referenceName": "servicebus"
-                        }
-                    },
-                    "method": "post",
-                    "path": "/@{encodeURIComponent(encodeURIComponent('neworders'))}/messages/deadletter",
-                    "queries": {
-                        "lockToken": "@triggerBody()?['LockToken']",
-                        "deadLetterReason": "",
-                        "deadLetterErrorDescription": "",
-                        "sessionId": ""
-                    }
-                },
-                "runAfter": {
-                    "Scope": [
-                        "TIMEDOUT",
-                        "SKIPPED",
-                        "FAILED"
-                    ]
-                }
             }
         },
         "triggers": {
