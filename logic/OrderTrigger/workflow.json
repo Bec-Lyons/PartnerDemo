@@ -41,11 +41,11 @@
                                 }
                             },
                             "body": {
+                                "address": "@body('Parse_JSON')?['address']",
+                                "item": "@body('Parse_JSON')?['item']",
                                 "name": "@body('Parse_JSON')?['name']",
                                 "number": "@body('Parse_JSON')?['number']",
-                                "item": "@body('Parse_JSON')?['item']",
-                                "quantity": "@body('Parse_JSON')?['quantity']",
-                                "address": "@body('Parse_JSON')?['address']"
+                                "quantity": "@body('Parse_JSON')?['quantity']"
                             }
                         },
                         "runAfter": {
@@ -56,6 +56,53 @@
                     }
                 },
                 "runAfter": {}
+            },
+            "Complete_the_message_in_a_queue": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "referenceName": "servicebus_1"
+                        }
+                    },
+                    "method": "delete",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('neworders'))}/messages/complete",
+                    "queries": {
+                        "lockToken": "@triggerBody()?['LockToken']",
+                        "queueType": "Main",
+                        "sessionId": ""
+                    }
+                },
+                "runAfter": {
+                    "Scope": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Dead-letter_the_message_in_a_queue": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "referenceName": "servicebus_1"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('neworders'))}/messages/deadletter",
+                    "queries": {
+                        "lockToken": "@triggerBody()?['LockToken']",
+                        "deadLetterReason": "",
+                        "deadLetterErrorDescription": "",
+                        "sessionId": ""
+                    }
+                },
+                "runAfter": {
+                    "Scope": [
+                        "TIMEDOUT",
+                        "FAILED",
+                        "SKIPPED"
+                    ]
+                }
             }
         },
         "triggers": {
