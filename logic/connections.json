@@ -25,6 +25,20 @@
         "scheme": "Key",
         "parameter": "@appsetting('servicebus_1-connectionKey')"
       }
+    }, 
+    "x12": {
+      "api": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/providers/Microsoft.Web/locations/westus/managedApis/x12"
+      },
+      "connection": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/RetailIntegration/providers/Microsoft.Web/connections/x12"
+      },
+      "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/x12/cb70a7ef54cc49fe8a8f3eb13635f3a0/",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('x12-connectionKey')"
+      }
     }
   }
 }
