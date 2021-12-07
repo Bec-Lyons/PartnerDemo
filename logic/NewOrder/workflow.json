@@ -44,7 +44,10 @@
                 "type": "ServiceProvider",
                 "inputs": {
                     "parameters": {
-                        "entityName": "neworder"
+                        "entityName": "neworder",
+                        "message": {
+                            "contentData": "@body('Parse_JSON')?['description']"
+                        }
                     },
                     "serviceProviderConfiguration": {
                         "connectionName": "serviceBus",

@@ -1,17 +1,5 @@
 {
   "managedApiConnections": {
-    "servicebus": {
-      "api": {
-        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/providers/Microsoft.Web/locations/westus/managedApis/servicebus"
-      },
-      "connection": {
-        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/connections/providers/Microsoft.Web/connections/servicebus-2"
-      },
-      "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/servicebus/be4093ec320e4739a2b28abbeca0f48d/",
-      "authentication": {
-        "type": "ManagedIdentity"
-      }
-    },
     "servicebus_1": {
       "api": {
         "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/providers/Microsoft.Web/locations/westus/managedApis/servicebus"
@@ -64,6 +52,15 @@
         "id": "/serviceProviders/serviceBus"
       },
       "displayName": "servicebus"
+    },
+    "serviceBus-2": {
+      "parameterValues": {
+        "connectionString": "@appsetting('serviceBus_12_connectionString')"
+      },
+      "serviceProvider": {
+        "id": "/serviceProviders/serviceBus"
+      },
+      "displayName": "Servicebusconnstring2"
     }
   },
   "functionConnections": {
