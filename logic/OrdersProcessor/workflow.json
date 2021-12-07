@@ -99,7 +99,7 @@
                 "inputs": {
                     "host": {
                         "connection": {
-                            "referenceName": "servicebus_1"
+                            "referenceName": "servicebus_2"
                         }
                     },
                     "method": "delete",
@@ -121,7 +121,7 @@
                 "inputs": {
                     "host": {
                         "connection": {
-                            "referenceName": "servicebus_1"
+                            "referenceName": "servicebus_2"
                         }
                     },
                     "method": "post",
@@ -148,7 +148,7 @@
                 "inputs": {
                     "host": {
                         "connection": {
-                            "referenceName": "servicebus_1"
+                            "referenceName": "servicebus_2"
                         }
                     },
                     "method": "get",

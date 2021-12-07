@@ -1,0 +1,27 @@
+{
+    "sbauth": {
+        "type":"object", 
+        "value": {
+            "type": "ManagedServiceIdentity"
+        }
+    }, 
+    "sbauth2": {
+        "type":"object", 
+        "value": {
+            "type": "ManagedServiceIdentity"
+        }
+    }, 
+    "x12auth": {
+        "type":"object", 
+        "value": {
+            "type": "ManagedServiceIdentity"
+        }
+    },
+    "sqlauth": {
+        "type":"object", 
+        "value": {
+            "type": "ManagedServiceIdentity"
+        }
+    }
+
+}

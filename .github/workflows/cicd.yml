@@ -21,7 +21,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Package logic
-      run: (cd logic; mkdir -p ../build-art; zip -r ../build-art/logic.zip .)
+      run: (cd logic; cp 'azure.parameters.json' 'parameters.json'; mkdir -p ../build-art; zip -r ../build-art/logic.zip .; )
     - name: Upload app zip package
       uses: actions/upload-artifact@v2
       with:

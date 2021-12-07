@@ -1,0 +1,35 @@
+{
+    "sbauth": {
+        "type":"object", 
+        "value": {
+            "type": "Raw",
+            "scheme": "Key",
+            "parameter": "@appsetting('servicebus_1-connectionKey')"
+        }
+    },
+    "sbauth2": {
+        "type":"object", 
+        "value": {
+            "type": "Raw",
+            "scheme": "Key",
+            "parameter": "@appsetting('servicebus_2-connectionKey')"
+        }
+    },
+    "x12auth": {
+        "type":"object", 
+        "value": {
+            "type": "Raw",
+            "scheme": "Key",
+            "parameter": "@appsetting('x12-connectionKey')"
+        }
+    },
+    "sqlauth": {
+        "type":"object", 
+        "value": {
+            "type": "Raw",
+            "scheme": "Key",
+            "parameter": "@appsetting('sql-connectionKey')"
+        }
+    }
+    
+}

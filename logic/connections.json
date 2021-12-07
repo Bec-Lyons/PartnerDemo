@@ -8,11 +8,7 @@
         "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/connections/providers/Microsoft.Web/connections/servicebus"
       },
       "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/servicebus/414ac0c80f6f45b4a75ff8085f0a9ae3/",
-      "authentication": {
-        "type": "Raw",
-        "scheme": "Key",
-        "parameter": "@appsetting('servicebus_1-connectionKey')"
-      }
+      "authentication": "@parameters('sbauth')"
     },
     "x12": {
       "api": {
@@ -22,11 +18,7 @@
         "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/RetailIntegration/providers/Microsoft.Web/connections/x12"
       },
       "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/x12/cb70a7ef54cc49fe8a8f3eb13635f3a0/",
-      "authentication": {
-        "type": "Raw",
-        "scheme": "Key",
-        "parameter": "@appsetting('x12-connectionKey')"
-      }
+      "authentication": "@parameters('x12auth')"
     },
     "sql": {
       "api": {
@@ -36,11 +28,17 @@
         "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/connections/providers/Microsoft.Web/connections/sql"
       },
       "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/sql/dfdc66ce155e434090cb2fe026cc38ae/",
-      "authentication": {
-        "type": "Raw",
-        "scheme": "Key",
-        "parameter": "@appsetting('sql-connectionKey')"
-      }
+      "authentication": "@parameters('sqlauth')"
+    },
+    "servicebus_2": {
+      "api": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/providers/Microsoft.Web/locations/westus/managedApis/servicebus"
+      },
+      "connection": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/connections/providers/Microsoft.Web/connections/servicebus-2"
+      },
+      "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/servicebus/be4093ec320e4739a2b28abbeca0f48d/",
+      "authentication": "@parameters('sbauth2')"
     }
   },
   "serviceProviderConnections": {
