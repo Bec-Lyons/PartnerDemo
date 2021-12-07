@@ -10,7 +10,7 @@
                         "itemID": "@triggerBody()?['itemid']"
                     },
                     "function": {
-                        "connectionName": "azureFunctionOperation-2"
+                        "connectionName": "azureFunctionOperation"
                     }
                 },
                 "runAfter": {}
@@ -28,35 +28,13 @@
                         "OrderID": "@triggerBody()?['orderid']",
                         "name": "@triggerBody()?['user']",
                         "number": "@triggerBody()?['phoneno']",
-                        "item": "@body('Parse_JSON')?['itemname']",
                         "address": "@triggerBody()?['address']",
                         "quantity": "@triggerBody()?['quantity']"
                     },
                     "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('default'))},@{encodeURIComponent(encodeURIComponent('default'))}/tables/@{encodeURIComponent(encodeURIComponent('[dbo].[OrdersTable]'))}/items"
                 },
                 "runAfter": {
-                    "Parse_JSON": [
-                        "Succeeded"
-                    ]
-                }
-            },
-            "Send_message": {
-                "type": "ServiceProvider",
-                "inputs": {
-                    "parameters": {
-                        "entityName": "neworder",
-                        "message": {
-                            "contentData": "@body('Parse_JSON')?['description']"
-                        }
-                    },
-                    "serviceProviderConfiguration": {
-                        "connectionName": "serviceBus",
-                        "operationId": "sendMessage",
-                        "serviceProviderId": "/serviceProviders/serviceBus"
-                    }
-                },
-                "runAfter": {
-                    "Insert_row_(V2)": [
+                    "Call_an_Azure_function": [
                         "Succeeded"
                     ]
                 }
@@ -68,31 +46,64 @@
                     "statusCode": 200
                 },
                 "runAfter": {
-                    "Send_message": [
+                    "Condition": [
                         "Succeeded"
                     ]
                 }
             },
-            "Parse_JSON": {
-                "type": "ParseJson",
-                "inputs": {
-                    "content": "@outputs('Call_an_Azure_function')?['body']",
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "itemname": {
-                                "type": "string"
-                            },
-                            "description": {
-                                "type": "string"
-                            }
+            "Condition": {
+                "type": "If",
+                "expression": {
+                    "and": [
+                        {
+                            "contains": [
+                                "@outputs('Call_an_Azure_function')?['body']",
+                                "true"
+                            ]
                         }
+                    ]
+                },
+                "actions": {
+                    "Send_message_2": {
+                        "type": "ServiceProvider",
+                        "inputs": {
+                            "parameters": {
+                                "entityName": "newpriorityorder"
+                            },
+                            "serviceProviderConfiguration": {
+                                "connectionName": "serviceBus",
+                                "operationId": "sendMessage",
+                                "serviceProviderId": "/serviceProviders/serviceBus"
+                            }
+                        },
+                        "runAfter": {}
                     }
                 },
                 "runAfter": {
-                    "Call_an_Azure_function": [
+                    "Insert_row_(V2)": [
                         "Succeeded"
                     ]
+                },
+                "else": {
+                    "actions": {
+                        "Send_message": {
+                            "type": "ServiceProvider",
+                            "inputs": {
+                                "parameters": {
+                                    "entityName": "neworder",
+                                    "message": {
+                                        "contentData": "@body('Insert_row_(V2)')"
+                                    }
+                                },
+                                "serviceProviderConfiguration": {
+                                    "connectionName": "serviceBus",
+                                    "operationId": "sendMessage",
+                                    "serviceProviderId": "/serviceProviders/serviceBus"
+                                }
+                            },
+                            "runAfter": {}
+                        }
+                    }
                 }
             }
         },
