@@ -25,7 +25,7 @@
         "scheme": "Key",
         "parameter": "@appsetting('servicebus_1-connectionKey')"
       }
-    }, 
+    },
     "x12": {
       "api": {
         "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/providers/Microsoft.Web/locations/westus/managedApis/x12"
@@ -39,6 +39,57 @@
         "scheme": "Key",
         "parameter": "@appsetting('x12-connectionKey')"
       }
+    },
+    "sql": {
+      "api": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/providers/Microsoft.Web/locations/westus/managedApis/sql"
+      },
+      "connection": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/connections/providers/Microsoft.Web/connections/sql"
+      },
+      "connectionRuntimeUrl": "https://90d081b6bfbe89ce.18.common.logic-westus.azure-apihub.net/apim/sql/dfdc66ce155e434090cb2fe026cc38ae/",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('sql-connectionKey')"
+      }
+    }
+  },
+  "serviceProviderConnections": {
+    "serviceBus": {
+      "parameterValues": {
+        "connectionString": "@appsetting('serviceBus_connectionString')"
+      },
+      "serviceProvider": {
+        "id": "/serviceProviders/serviceBus"
+      },
+      "displayName": "servicebus"
+    }
+  },
+  "functionConnections": {
+    "azureFunctionOperation": {
+      "function": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/RetailIntegration/providers/Microsoft.Web/sites/ordersprocessor2/functions/isloyaltymember"
+      },
+      "triggerUrl": "https://ordersprocessor2.azurewebsites.net/api/isloyaltymember",
+      "authentication": {
+        "type": "QueryString",
+        "name": "Code",
+        "value": "@appsetting('azureFunctionOperation_functionAppKey')"
+      },
+      "displayName": "function"
+    },
+    "azureFunctionOperation-2": {
+      "function": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/RetailIntegration/providers/Microsoft.Web/sites/ordersprocessor2/functions/getitemdetail"
+      },
+      "triggerUrl": "https://ordersprocessor2.azurewebsites.net/api/getitemdetail",
+      "authentication": {
+        "type": "QueryString",
+        "name": "Code",
+        "value": "@appsetting('azureFunctionOperation_12_functionAppKey')"
+      },
+      "displayName": "functionconnection"
     }
   }
 }
