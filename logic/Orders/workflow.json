@@ -1,0 +1,112 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Call_an_Azure_function": {
+                "type": "Function",
+                "inputs": {
+                    "method": "POST",
+                    "body": {
+                        "user": "@triggerBody()?['user']"
+                    },
+                    "function": {
+                        "connectionName": "azureFunctionOperation-3"
+                    }
+                },
+                "runAfter": {}
+            },
+            "Condition": {
+                "type": "If",
+                "expression": {
+                    "and": [
+                        {
+                            "contains": [
+                                "@outputs('Call_an_Azure_function')?['body']",
+                                "true"
+                            ]
+                        }
+                    ]
+                },
+                "actions": {
+                    "Send_message": {
+                        "type": "ServiceProvider",
+                        "inputs": {
+                            "parameters": {
+                                "entityName": "newpriorityorder",
+                                "message": {
+                                    "contentData": "@triggerBody()?['orderid']"
+                                }
+                            },
+                            "serviceProviderConfiguration": {
+                                "connectionName": "serviceBus",
+                                "operationId": "sendMessage",
+                                "serviceProviderId": "/serviceProviders/serviceBus"
+                            }
+                        },
+                        "runAfter": {}
+                    }
+                },
+                "runAfter": {
+                    "Call_an_Azure_function": [
+                        "Succeeded"
+                    ]
+                },
+                "else": {
+                    "actions": {
+                        "Send_message_2": {
+                            "type": "ServiceProvider",
+                            "inputs": {
+                                "parameters": {
+                                    "entityName": "neworder",
+                                    "message": {
+                                        "contentData": "@triggerBody()?['orderid']"
+                                    }
+                                },
+                                "serviceProviderConfiguration": {
+                                    "connectionName": "serviceBus",
+                                    "operationId": "sendMessage",
+                                    "serviceProviderId": "/serviceProviders/serviceBus"
+                                }
+                            },
+                            "runAfter": {}
+                        }
+                    }
+                }
+            }
+        },
+        "triggers": {
+            "manual": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "orderid": {
+                                "type": "string"
+                            },
+                            "user": {
+                                "type": "string"
+                            },
+                            "address": {
+                                "type": "string"
+                            },
+                            "phoneno": {
+                                "type": "string"
+                            },
+                            "itemid": {
+                                "type": "string"
+                            },
+                            "quantity": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {}
+    },
+    "kind": "Stateful"
+}

@@ -85,6 +85,18 @@
         "value": "@appsetting('azureFunctionOperation_12_functionAppKey')"
       },
       "displayName": "functionconnection"
+    },
+    "azureFunctionOperation-3": {
+      "function": {
+        "id": "/subscriptions/e63d5bef-3dab-4fd1-8890-f1f963299f8e/resourceGroups/RetailIntegration/providers/Microsoft.Web/sites/ordersprocessor2/functions/isloyaltymember"
+      },
+      "triggerUrl": "https://ordersprocessor2.azurewebsites.net/api/isloyaltymember",
+      "authentication": {
+        "type": "QueryString",
+        "name": "Code",
+        "value": "@appsetting('azureFunctionOperation_13_functionAppKey')"
+      },
+      "displayName": "loyaltymembers"
     }
   }
 }
